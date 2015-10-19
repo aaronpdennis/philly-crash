@@ -30,9 +30,10 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYWFyb25kZW5uaXMiLCJhIjoiem5LLURoYyJ9.T3tswGTI
 
 var phillyMap = new mapboxgl.Map({
   container: 'map', // container id
-  style: 'mapbox://styles/mapbox/streets-v8', //stylesheet location
+  style: 'mapbox://styles/aarondennis/cifyf2xeg000b9xlzg2d5f2a1', //stylesheet location
   center: [-75.14, 39.95], // starting position
-  zoom: 11 // starting zoom
+  zoom: 11, // starting zoom
+  pitch: 45
 });
 
 phillyMap.on('load', function() {
@@ -77,8 +78,9 @@ function loadStreet(street) {
             "line-cap": "round"
         },
         "paint": {
-            "line-color": "#888",
-            "line-width": 8
+            "line-color": "#16f7ff",
+            "line-width": 3,
+            "line-opacity": 0.7
         }
     });
 
