@@ -1,0 +1,39 @@
+geojson size: 124.7 MB
+
+How do we select collisions along a road?
+
+request collision tiles at zoom level 16 (maybe 17 or 18? not sure yet)
+
+https://github.com/mapbox/tile-cover
+https://github.com/mapbox/tilebelt
+https://github.com/developmentseed/vt-geojson
+https://github.com/mapbox/geojson-vt
+
+
+Tests: Which zoom level?
+
+zoom 16
+74 tiles
+58371 features
+32100 ms
+
+zoom 17
+154 tiles
+58371 features
+13729 ms
+
+zoom 18
+330 tiles
+58371 features
+13333 ms
+
+zoom 19
+722 tiles
+58371 features
+13033 ms
+
+why did I get the same number of features each time??? maybe it's just requesting the zoom 16 tile instead of generating 17, 18, or 19 level tiles. That would be why it took the same amount of time for each successive zoom level. I'll have to manually generate tiles all the way to 19 with tippecanoe.
+
+tippecanoe -o philly-crashes.mbtiles -f -l collision -n 'All Philly Crashes' -z 19 -Z 16 -b 0 -g 0 -r 0 philly-crashes.geojson
+
+Maybe we should select along a route? https://www.mapbox.com/mapbox.js/example/v1.0.0/mapbox-directions/
