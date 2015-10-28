@@ -37,3 +37,5 @@ why did I get the same number of features each time??? maybe it's just requestin
 tippecanoe -o philly-crashes.mbtiles -f -l collision -n 'All Philly Crashes' -z 19 -Z 16 -b 0 -g 0 -r 0 philly-crashes.geojson
 
 Maybe we should select along a route? https://www.mapbox.com/mapbox.js/example/v1.0.0/mapbox-directions/
+
+browserify -s TrafficRoute ./src/collisions.js > getCollisions.js

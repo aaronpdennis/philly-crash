@@ -10,20 +10,19 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
 
+  <script src='./getCollisions.js' charset='utf-8'></script>
+
+  </script>
+
   <style>
     body { margin:0; padding:0; }
-    #map { position:absolute; top:7em; bottom:0; width:100%; }
+    #map { position:absolute; top:0; bottom:0; left:0; right: 25%; }
   </style>
 </head>
 <body>
 
-<div style='padding:0.25em' id='street'>
-  <p style='font-family:monospace'> Add one of 'schuylkill_expressway', 'allegheny_ave', 'broad_street', or 'i95'.</p>
-  <input type='text' id='street-name' name='street-name'>
-  <input type='submit' id='add' value='add'>
-  <input type='submit' id='remove' value='remove'>
-</div>
 <div id='map'></div>
+
 <script>
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWFyb25kZW5uaXMiLCJhIjoiem5LLURoYyJ9.T3tswGTI5ve8_wE-a02cMw';
@@ -39,55 +38,25 @@ var phillyMap = new mapboxgl.Map({
 
 phillyMap.on('load', function() {
 
-  var add = document.getElementById('add'),
-      remove = document.getElementById('remove');
+  console.log('map is loaded');
 
-  add.addEventListener('click', function() {
-    var query = document.getElementById('street-name').value;
-    loadStreet(query);
-  });
+  d3.json('https://api.mapbox.com/v4/directions/mapbox.driving/-75.0984,39.9942;-75.1835,39.9192.json?access_token=pk.eyJ1IjoiYWFyb25kZW5uaXMiLCJhIjoiem5LLURoYyJ9.T3tswGTI5ve8_wE-a02cMw', function(data) {
 
-  remove.addEventListener('click', function() {
-    var query = document.getElementById('street-name').value;
-    removeStreet(query);
-  });
+    //var TrafficRoute = require('TrafficRoute');
+
+    route = new TrafficRoute(data, 0);
+
+    route.getCollisions();
+
+    setInterval(function () {
+
+      console.log(route.collisions.features.length);
+
+    }, 1000);
+
+  })
 
 });
-
-function removeStreet(street) {
-  phillyMap.removeLayer(street);
-  phillyMap.removeSource(street);
-}
-
-function loadStreet(street) {
-
-  d3.json(street + '.geojson', function(err,data) {
-
-    var feature = data.features[0];
-
-    phillyMap.addSource(street, {
-        "type": "geojson",
-        "data": feature
-    });
-
-    phillyMap.addLayer({
-        "id": street,
-        "type": "line",
-        "source": street,
-        "layout": {
-            "line-join": "round",
-            "line-cap": "round"
-        },
-        "paint": {
-            "line-color": "#16f7ff",
-            "line-width": 3,
-            "line-opacity": 0.7
-        }
-    });
-
-  });
-
-}
 
 </script>
 
