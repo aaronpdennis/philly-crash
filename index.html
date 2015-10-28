@@ -38,7 +38,7 @@ var phillyMap = new mapboxgl.Map({
   hash: true
 });
 
-phillyMap.on('load', function() {
+//phillyMap.on('load', function() {
 
   d3.select('#data').text('requesting directions...');
 
@@ -64,7 +64,7 @@ phillyMap.on('load', function() {
 
   });
 
-});
+//});
 
 function addCollisionPointsToMap(data) {
   phillyMap.addSource('selectedCollisions', {
