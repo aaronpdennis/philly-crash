@@ -8,7 +8,7 @@
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.11.1/mapbox-gl.js'></script>
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.11.1/mapbox-gl.css' rel='stylesheet' />
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+  <script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js' charset='utf-8'></script>
 
   <script src='./getCollisions.js' charset='utf-8'></script>
 
@@ -16,12 +16,14 @@
 
   <style>
     body { margin:0; padding:0; }
-    #map { position:absolute; top:0; bottom:0; left:0; right: 25%; }
+    #map { position:absolute; top:0; bottom:0; left:0; right: 35%; }
+    #data { position:absolute; top:0; bottom:0; left:65%; right: 0; overflow: scroll; padding: 0.2em; font-size: 0.8em; }
   </style>
 </head>
 <body>
 
 <div id='map'></div>
+<pre id='data'>loading map...</pre>
 
 <script>
 
@@ -38,25 +40,49 @@ var phillyMap = new mapboxgl.Map({
 
 phillyMap.on('load', function() {
 
+  d3.select('#data').text('requesting directions...');
+
   console.log('map is loaded');
 
   d3.json('https://api.mapbox.com/v4/directions/mapbox.driving/-75.0984,39.9942;-75.1835,39.9192.json?access_token=pk.eyJ1IjoiYWFyb25kZW5uaXMiLCJhIjoiem5LLURoYyJ9.T3tswGTI5ve8_wE-a02cMw', function(data) {
 
     //var TrafficRoute = require('TrafficRoute');
 
-    route = new TrafficRoute(data, 0);
+    var trafficRoute = new TrafficRoute(data, 0);
 
-    route.getCollisions();
+    d3.select('#data').text('selecting collisions along ' + trafficRoute.summary + '...');
 
-    setInterval(function () {
+    trafficRoute.getCollisions(function() {
 
-      console.log(route.collisions.features.length);
+      addCollisionPointsToMap(trafficRoute.collisions);
 
-    }, 1000);
+      d3.select('#data').text(JSON.stringify(trafficRoute.collisions,null,2));
 
-  })
+      console.log(trafficRoute.collisions.features.length);
+
+    });
+
+  });
 
 });
+
+function addCollisionPointsToMap(data) {
+  phillyMap.addSource('selectedCollisions', {
+    'type': 'geojson',
+    'data': data
+  });
+
+  phillyMap.addLayer({
+    'id': 'collisionPoints',
+    'type': 'circle',
+    'source': 'selectedCollisions',
+    'paint': {
+      'circle-radius': 4,
+      'circle-color': 'orange',
+      'circle-opacity': 0.4
+    }
+  });
+}
 
 </script>
 

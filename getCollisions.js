@@ -23,7 +23,7 @@ function TrafficRoute(directionsObject, routeChoice) {
   this.status = status;
   this.collisions = collisions;
 
-  this.getCollisions = function(callback) {
+  this.getCollisions = function(cb) {
 
     status = 'processing';
 
@@ -58,6 +58,7 @@ function TrafficRoute(directionsObject, routeChoice) {
       .on('end', function () {
 
         status = 'finished';
+        cb();
 
       });
 
