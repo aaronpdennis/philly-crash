@@ -33,7 +33,7 @@ function TrafficRoute(directionsObject, routeChoice) {
 
     var routeBuffer = turf.buffer(route, 8, 'meters');
 
-    var limits = { min_zoom: 16, max_zoom: 16 };
+    var limits = { min_zoom: 16, max_zoom: 17 };
 
     var tiles = cover.tiles(routeBuffer.features[0].geometry, limits);
 

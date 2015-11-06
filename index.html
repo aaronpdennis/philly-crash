@@ -38,15 +38,13 @@ var phillyMap = new mapboxgl.Map({
   hash: true
 });
 
-//phillyMap.on('load', function() {
+phillyMap.on('load', function() {
 
   d3.select('#data').text('requesting directions...');
 
   console.log('map is loaded');
 
-  d3.json('https://api.mapbox.com/v4/directions/mapbox.driving/-75.0984,39.9942;-75.1835,39.9192.json?access_token=pk.eyJ1IjoiYWFyb25kZW5uaXMiLCJhIjoiem5LLURoYyJ9.T3tswGTI5ve8_wE-a02cMw', function(data) {
-
-    //var TrafficRoute = require('TrafficRoute');
+  d3.json('https://api.mapbox.com/v4/directions/mapbox.driving/-75.0984,39.9942;-75.22613525390625,39.93659244591381.json?access_token=pk.eyJ1IjoiYWFyb25kZW5uaXMiLCJhIjoiem5LLURoYyJ9.T3tswGTI5ve8_wE-a02cMw', function(data) {
 
     var trafficRoute = new TrafficRoute(data, 0);
 
@@ -64,7 +62,7 @@ var phillyMap = new mapboxgl.Map({
 
   });
 
-//});
+});
 
 function addCollisionPointsToMap(data) {
   phillyMap.addSource('selectedCollisions', {
