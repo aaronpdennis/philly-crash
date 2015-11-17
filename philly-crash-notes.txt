@@ -34,7 +34,7 @@ zoom 19
 
 why did I get the same number of features each time??? maybe it's just requesting the zoom 16 tile instead of generating 17, 18, or 19 level tiles. That would be why it took the same amount of time for each successive zoom level. I'll have to manually generate tiles all the way to 19 with tippecanoe.
 
-tippecanoe -o philly-crashes.mbtiles -f -l collision -n 'All Philly Crashes' -z 19 -Z 16 -b 0 -g 0 -r 0 philly-crashes.geojson
+tippecanoe -o philly-crashes.mbtiles -f -l collision -n 'All Philly Crashes' -z 16 -Z 16 -b 0 -g 0 -r 0 philly-crashes.geojson
 
 Maybe we should select along a route? https://www.mapbox.com/mapbox.js/example/v1.0.0/mapbox-directions/
 

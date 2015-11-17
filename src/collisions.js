@@ -32,11 +32,11 @@ function TrafficRoute(directionsObject, routeChoice) {
 
     var routeBuffer = turf.buffer(route, 8, 'meters');
 
-    var limits = { min_zoom: 16, max_zoom: 17 };
+    var limits = { min_zoom: 16, max_zoom: 16 };
 
     var tiles = cover.tiles(routeBuffer.features[0].geometry, limits);
 
-    var source = 'tilejson+http://api.tiles.mapbox.com/v4/aarondennis.7i147a82.json?access_token=pk.eyJ1IjoiYWFyb25kZW5uaXMiLCJhIjoiem5LLURoYyJ9.T3tswGTI5ve8_wE-a02cMw'
+    var source = 'tilejson+http://api.tiles.mapbox.com/v4/aarondennis.bcefcoun.json?access_token=pk.eyJ1IjoiYWFyb25kZW5uaXMiLCJhIjoiem5LLURoYyJ9.T3tswGTI5ve8_wE-a02cMw'
 
     vtGeoJson(source, { tiles: tiles })
       .on('data', function(collision) {
