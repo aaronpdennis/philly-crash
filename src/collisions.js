@@ -22,7 +22,7 @@ function TrafficRoute(directionsObject, routeChoice) {
   this.status = status;
   this.collisions = collisions;
 
-  this.getCollisions = function(cb) {
+  this.getCollisions = function(pg,cb) {
 
     status = 'processing';
 
@@ -51,6 +51,7 @@ function TrafficRoute(directionsObject, routeChoice) {
 
           collisions.features.push(collision);
           progress++;
+          pg();
         };
 
       })
