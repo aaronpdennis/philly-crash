@@ -127,8 +127,6 @@ var createHistogram = function(routeCollisions, routeLength) {
       severityDiv.innerHTML = d.properties.MAX_SEVERI;
       peopleCountDiv.innerHTML = d.properties.PERSON_COU;
 
-      console.log(d);
-
       highlightSource.setData(d);
     });
 }

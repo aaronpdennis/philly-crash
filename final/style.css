@@ -1,0 +1,141 @@
+body {
+  margin: 0;
+}
+
+#container {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #fff;
+  font-family: monospace;
+  color: white;
+}
+
+
+/* ROUTE SELECTION */
+
+#routeSelection {
+  padding: 0.5em;
+  position: absolute;
+  right: 0.5em;
+  top: 0.5em;
+  z-index: 0;
+  background-color: #000;
+  background-blend-mode: overlay;
+  opacity: 0.8;
+}
+
+#routeEndSelectionAddressSearch {
+  border-color: orange;
+  z-index: 2;
+}
+
+#routeStartSelectionAddressSearch {
+  border-color: teal;
+  z-index: 2;
+  margin-bottom: 0.5em;
+}
+
+input[type=text]{
+  margin-top: 0.5em;
+}
+
+input[type=text]:focus {
+  outline: none;
+  border-color: #333;
+  background-color: #fff;
+}
+
+.geocode {
+  width: 16em;
+  margin: 0em;
+  padding: 0.5em;
+  border-style: solid;
+  border-width: 0.2em;
+  border-color: #545;
+  background-color: #eee;
+  font-family: monospace;
+  font-size: 1em;
+}
+
+.suggestion {
+  cursor: pointer;
+  border-width: 0.1em;
+  margin-left: 0.1em;
+  color: #000;
+}
+
+.suggestion:hover {
+  background-color: yellow;
+}
+
+
+/* MAP */
+
+#map {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+/* SUMMARY */
+
+#panel {
+  position: absolute;
+  top: 0.5em;
+  left: 0.5em;
+  right: 70%;
+  padding: 0.5em;
+  z-index: 2;
+  background-color: #000;
+  background-blend-mode: overlay;
+  opacity: 0.8;
+}
+
+#title {
+  font-size: 3em;
+}
+
+#summary {
+  visibility: hidden;
+}
+
+/* HISTOGRAM */
+#routeHistogram {
+  position: absolute;
+  margin: 0;
+  top: 65%;
+  bottom: 0.5em;
+  left: 0.5em;
+  right: 0.5em;
+  z-index: 1;
+  background-color: #000;
+  background-blend-mode: overlay;
+  opacity: 0.8;
+}
+
+.label {
+  fill: white;
+}
+
+.crashPoint {
+  stroke: #000;
+  stroke-width: 1px;
+  cursor: pointer;
+}
+
+.crashPoint:hover {
+  stroke: yellow;
+  stroke-width: 2px;
+}
+
+.progressing{
+  color: #E220F5;
+}
+.ready {
+  color: #6AC71B;
+}
